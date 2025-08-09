@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key></key>
+	<integer>-2147483648</integer>
+	<key>Amps and Pedals</key>
+	<integer>3</integer>
+	<key>Amps and Pedals:Stompboxes:Delay</key>
+	<integer>4</integer>
+	<key>Amps and Pedals:Stompboxes:Distortion</key>
+	<integer>12</integer>
+	<key>Amps and Pedals:Stompboxes:Dynamics</key>
+	<integer>1</integer>
+	<key>Amps and Pedals:Stompboxes:Filter</key>
+	<integer>4</integer>
+	<key>Amps and Pedals:Stompboxes:Modulation</key>
+	<integer>12</integer>
+	<key>Amps and Pedals:Stompboxes:Pitch</key>
+	<integer>2</integer>
+	<key>Delay</key>
+	<integer>2</integer>
+	<key>Distortion</key>
+	<integer>1</integer>
+	<key>Drums</key>
+	<integer>3</integer>
+	<key>Dynamics</key>
+	<integer>3</integer>
+	<key>EQ</key>
+	<integer>4</integer>
+	<key>EQ:Vintage EQ Collection</key>
+	<integer>3</integer>
+	<key>Filter</key>
+	<integer>0</integer>
+	<key>Imaging</key>
+	<integer>8</integer>
+	<key>Metering</key>
+	<integer>6</integer>
+	<key>Modulation</key>
+	<integer>4</integer>
+	<key>Multi Effects</key>
+	<integer>4</integer>
+	<key>Pitch</key>
+	<integer>2</integer>
+	<key>Reverb</key>
+	<integer>3</integer>
+	<key>Sampler</key>
+	<integer>17</integer>
+	<key>Specialized</key>
+	<integer>1</integer>
+	<key>Studio Instruments</key>
+	<integer>4</integer>
+	<key>Synthesizer</key>
+	<integer>3</integer>
+	<key>Utility</key>
+	<integer>11</integer>
+	<key>Vintage Keys</key>
+	<integer>2</integer>
+</dict>
+</plist>

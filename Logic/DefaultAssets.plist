@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PluginSettings</key>
+	<dict>
+		<key>Animoog Z</key>
+		<string>file:///Users/donaldmoore/Library/Audio/Presets/Moog/Animoog%20Z/%23default.aupreset</string>
+		<key>Audio Units</key>
+		<dict>
+			<key>Apple</key>
+			<dict>
+				<key>AUPeakLimiter</key>
+				<string>file:///Users/donaldmoore/Library/Audio/Presets/Apple/AUPeakLimiter/%23default.aupreset</string>
+			</dict>
+			<key>Surge Synth Team</key>
+			<dict>
+				<key>Surge XT Effects</key>
+				<string>file:///Users/donaldmoore/Library/Audio/Presets/Surge%20Synth%20Team/Surge%20XT%20Effects/%23default.aupreset</string>
+			</dict>
+		</dict>
+		<key>Delay</key>
+		<dict>
+			<key>Delay Designer</key>
+			<string>file:///Users/donaldmoore/Music/Audio%20Music%20Apps/Plug-In%20Settings/Delay%20Designer/%23default.pst</string>
+		</dict>
+		<key>Distortion</key>
+		<dict>
+			<key>Bitcrusher</key>
+			<string>file:///Users/donaldmoore/Music/Audio%20Music%20Apps/Plug-In%20Settings/Bitcrusher/%23default.pst</string>
+			<key>Clip Distortion</key>
+			<string>file:///Users/donaldmoore/Music/Audio%20Music%20Apps/Plug-In%20Settings/Clip%20Distortion/%23default.pst</string>
+			<key>Overdrive</key>
+			<string>file:///Users/donaldmoore/Music/Audio%20Music%20Apps/Plug-In%20Settings/Overdrive/%23default.pst</string>
+		</dict>
+		<key>Dynamics</key>
+		<dict>
+			<key>Adaptive Limiter</key>
+			<string>file:///Users/donaldmoore/Music/Audio%20Music%20Apps/Plug-In%20Settings/Adaptive%20Limiter/%23default.pst</string>
+			<key>Compressor</key>
+			<string>file:///Users/donaldmoore/Music/Audio%20Music%20Apps/Plug-In%20Settings/Compressor/%23default.pst</string>
+			<key>DeEsser 2</key>
+			<string>file:///Users/donaldmoore/Music/Audio%20Music%20Apps/Plug-In%20Settings/DeEsser%202/%23default.pst</string>
+			<key>Enveloper</key>
+			<string>file:///Users/donaldmoore/Music/Audio%20Music%20Apps/Plug-In%20Settings/Enveloper/%23default.pst</string>
+		</dict>
+		<key>EQ</key>
+		<dict>
+			<key>Channel EQ</key>
+			<string>file:///Users/donaldmoore/Music/Audio%20Music%20Apps/Plug-In%20Settings/Channel%20EQ/%23default.pst</string>
+			<key>Single Band EQ</key>
+			<string>file:///Users/donaldmoore/Music/Audio%20Music%20Apps/Plug-In%20Settings/Single%20Band%20EQ/%23default.pst</string>
+		</dict>
+		<key>Filter</key>
+		<dict>
+			<key>EVOC 20 TrackOscillator</key>
+			<string>file:///Users/donaldmoore/Music/Audio%20Music%20Apps/Plug-In%20Settings/EVOC%2020%20TrackOscillator/%23default.pst</string>
+		</dict>
+		<key>Imaging</key>
+		<dict>
+			<key>Direction Mixer</key>
+			<string>file:///Users/donaldmoore/Music/Audio%20Music%20Apps/Plug-In%20Settings/Direction%20Mixer/%23default.pst</string>
+		</dict>
+		<key>Pitch</key>
+		<dict>
+			<key>Pitch Correction</key>
+			<string>file:///Users/donaldmoore/Music/Audio%20Music%20Apps/Plug-In%20Settings/Pitch%20Correction/%23default.pst</string>
+		</dict>
+		<key>Reverb</key>
+		<dict>
+			<key>Space Designer</key>
+			<string>file:///Users/donaldmoore/Music/Audio%20Music%20Apps/Plug-In%20Settings/Space%20Designer/%23default.pst</string>
+		</dict>
+	</dict>
+</dict>
+</plist>
