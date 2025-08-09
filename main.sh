@@ -1,6 +1,14 @@
 #!/bin/bash
 set -euo pipefail
 
+# Check for required commands
+for cmd in git cp mkdir; do
+    if ! command -v "$cmd" >/dev/null 2>&1; then
+        echo "Error: Required command '$cmd' not found. Please install it before running this script." >&2
+        exit 1
+    fi
+done
+
 # Set directories for backup
 IMGNXDAW_PLUGIN_DIR="$HOME/Music/Audio Music Apps"
 IMGNXDAW_SUPPORT_DIR="$HOME/Library/Application Support/Logic"
@@ -43,30 +51,23 @@ else
 fi
 
 
-# Check if backup directory exists, if not create it
+
+# Check and create backup directory
 if [ ! -d "$IMGNXDAW_BACKUP_DIR" ]; then
     echo "Backup directory not found, creating..."
-    mkdir -p "$IMGNXDAW_BACKUP_DIR"
-    cd "$IMGNXDAW_BACKUP_DIR" || exit 1
-    if [ ! -d .git ]; then
-        git init
-        echo "Git repository initialized."
+    if ! mkdir -p "$IMGNXDAW_BACKUP_DIR"; then
+        echo "Error: Could not create backup directory '$IMGNXDAW_BACKUP_DIR'." >&2
+        exit 1
     fi
-    if ! git remote | grep -q origin; then
-        git remote add origin "$IMGNXDAW_REMOTE_REPO_URL"
-        echo "Git remote 'origin' added."
-    fi
-else
-    echo "Backup directory exists, proceeding..."
-    cd "$IMGNXDAW_BACKUP_DIR" || exit 1
-    if [ ! -d .git ]; then
-        git init
-        echo "Git repository initialized."
-    fi
-    if ! git remote | grep -q origin; then
-        git remote add origin "$IMGNXDAW_REMOTE_REPO_URL"
-        echo "Git remote 'origin' added."
-    fi
+fi
+cd "$IMGNXDAW_BACKUP_DIR" || { echo "Error: Could not cd to backup directory." >&2; exit 1; }
+if [ ! -d .git ]; then
+    git init
+    echo "Git repository initialized."
+fi
+if ! git remote | grep -q origin; then
+    git remote add origin "$IMGNXDAW_REMOTE_REPO_URL"
+    echo "Git remote 'origin' added."
 fi
 
 export IMGNXDAW_PLUGIN_DIR
@@ -86,16 +87,16 @@ export IMGNXDAW_TRANSIENT_DIR
 : "${IMGNXDAW_BACKUP_DIR_FILE:?IMGNXDAW_BACKUP_DIR_FILE must be set}"
 : "${IMGNXDAW_TRANSIENT_DIR:?IMGNXDAW_TRANSIENT_DIR must be set}"
 
+
 # Print values for confirmation
-cat <<EOF
-IMGNXDAW_PLUGIN_DIR=$IMGNXDAW_PLUGIN_DIR
-IMGNXDAW_SUPPORT_DIR=$IMGNXDAW_SUPPORT_DIR
-IMGNXDAW_PREFS_FILE=$IMGNXDAW_PREFS_FILE
-IMGNXDAW_CACHE_DIR=$IMGNXDAW_CACHE_DIR
-IMGNXDAW_CACHE_FILE=$IMGNXDAW_CACHE_FILE
-IMGNXDAW_BACKUP_DIR_FILE=$IMGNXDAW_BACKUP_DIR_FILE
-IMGNXDAW_TRANSIENT_DIR=$IMGNXDAW_TRANSIENT_DIR
-EOF
+echo "Configuration:"
+echo "  PLUGIN_DIR: $IMGNXDAW_PLUGIN_DIR"
+echo "  SUPPORT_DIR: $IMGNXDAW_SUPPORT_DIR"
+echo "  PREFS_FILE: $IMGNXDAW_PREFS_FILE"
+echo "  CACHE_DIR: $IMGNXDAW_CACHE_DIR"
+echo "  CACHE_FILE: $IMGNXDAW_CACHE_FILE"
+echo "  BACKUP_DIR_FILE: $IMGNXDAW_BACKUP_DIR_FILE"
+echo "  TRANSIENT_DIR: $IMGNXDAW_TRANSIENT_DIR"
 
 # Ask user for action: backup or restore
 echo ""
@@ -107,26 +108,35 @@ read -rp "Enter your choice [b/r/t]: " ACTION
 case "$ACTION" in
     b|B)
         echo "Backing up plugin settings..."
-        bash "$(dirname "$0")/bk.sh"
+        if ! bash "$(dirname "$0")/bk.sh"; then
+            echo "Error: Backup failed." >&2
+            exit 1
+        fi
+        echo "Backup completed successfully."
     ;;
     r|R)
         read -rp "Are you sure you want to restore plugin settings from the remote repository? This will overwrite your current settings. (y/N): " CONFIRM_RESTORE
         if [[ "$CONFIRM_RESTORE" =~ ^[Yy]$ ]]; then
             echo "Backing up current plugin settings before restoring..."
-            bash "$(dirname "$0")/bk.sh"
+            if ! bash "$(dirname "$0")/bk.sh"; then
+                echo "Error: Pre-restore backup failed." >&2
+                exit 1
+            fi
             echo "Pulling latest plugin settings from remote repository..."
-            cd "$IMGNXDAW_BACKUP_DIR" || exit 1
+            cd "$IMGNXDAW_BACKUP_DIR" || { echo "Error: Could not cd to backup directory." >&2; exit 1; }
             if git pull origin main; then
                 echo "Pulled latest plugin settings from remote repository."
                 echo "Restoring plugin settings from remote backup..."
-                bash "$(dirname "$0")/restore.sh"
+                if ! bash "$(dirname "$0")/restore.sh"; then
+                    echo "Error: Restore failed." >&2
+                    exit 1
+                fi
+                echo "Restore completed successfully."
             else
-                echo "Error: git pull failed. Could not restore from remote repository."
+                echo "Error: git pull failed. Could not restore from remote repository." >&2
                 echo "Restore cancelled."
                 exit 1
             fi
-            echo "Restoring plugin settings from remote backup..."
-            bash "$(dirname "$0")/restore.sh"
         else
             echo "Restore cancelled."
         fi
@@ -135,7 +145,11 @@ case "$ACTION" in
         read -rp "Are you sure you want to restore from the transient backup? This will overwrite your current settings. (y/N): " CONFIRM_TRANSIENT
         if [[ "$CONFIRM_TRANSIENT" =~ ^[Yy]$ ]]; then
             echo "Restoring plugin settings from transient backup..."
-            bash "$(dirname "$0")/transient.sh"
+            if ! bash "$(dirname "$0")/transient.sh"; then
+                echo "Error: Transient restore failed." >&2
+                exit 1
+            fi
+            echo "Transient restore completed successfully."
         else
             echo "Transient restore cancelled."
         fi
